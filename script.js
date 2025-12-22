@@ -57,4 +57,36 @@ button.addEventListener("click", () => {
   });
 
   
+const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+  deleteBtn.classList.add("icon-btn");
+  deleteBtn.addEventListener("click", () => {
+    taskToDelete = li;
+    deleteModal.style.display = "flex";
+  });
+
+  actions.appendChild(checkbox);
+  actions.appendChild(editBtn);
+  actions.appendChild(deleteBtn);
+
+  li.appendChild(span);
+  li.appendChild(actions);
+  todoList.appendChild(li);
+
+  input.value = "";
+});
+
+
+confirmDelete.addEventListener("click", () => {
+  if (taskToDelete) {
+    taskToDelete.remove();
+    taskToDelete = null;
+  }
+  deleteModal.style.display = "none";
+});
+
+
+cancelDelete.addEventListener("click", () => {
+  deleteModal.style.display = "none";
+  taskToDelete = null;
 });
