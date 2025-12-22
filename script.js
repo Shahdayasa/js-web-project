@@ -90,3 +90,17 @@ cancelDelete.addEventListener("click", () => {
   deleteModal.style.display = "none";
   taskToDelete = null;
 });
+
+const doneBtn = document.getElementById("doneBtn");
+
+doneBtn.addEventListener("click", () =>{
+  const allTasks = document.querySelectorAll("#todoList li");
+
+  allTasks.forEach(task => {
+    const checkbox = task.querySelector(".task-checkbox");
+    const text = task.querySelector("span");
+
+    checkbox.checked = true;
+    text.style.textDecoration = "line-through";
+  });
+});
