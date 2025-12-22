@@ -23,38 +23,44 @@ button.addEventListener("click", function () {
 
   const li = document.createElement("li");
 
-
   const span = document.createElement("span");
   span.textContent = value;
 
-  const doneBtn = document.createElement("button");
-  doneBtn.textContent = "✔";
-  doneBtn.addEventListener("click", () => {
-    span.style.textDecoration = span.style.textDecoration === "line-through" ? "none" : "line-through";
+  const actionsContainer = document.createElement("div");
+  actionsContainer.classList.add("actions-container");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.classList.add("task-checkbox");
+  checkbox.addEventListener("change", () => {
+    span.style.textDecoration = checkbox.checked ? "line-through" : "none";
   });
 
-
   const editBtn = document.createElement("button");
-  editBtn.textContent = "Edit";
+  editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+  editBtn.classList.add("icon-btn");
   editBtn.addEventListener("click", () => {
     const newValue = prompt("Edit your task:", span.textContent);
     if (newValue) {
       span.textContent = newValue;
+      checkbox.checked = false;
+      span.style.textDecoration = "none";
     }
   });
 
-
   const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
+  deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+  deleteBtn.classList.add("icon-btn");
   deleteBtn.addEventListener("click", () => {
     li.remove();
   });
 
- 
+  actionsContainer.appendChild(checkbox);
+  actionsContainer.appendChild(editBtn);
+  actionsContainer.appendChild(deleteBtn);
+
   li.appendChild(span);
-  li.appendChild(doneBtn);
-  li.appendChild(editBtn);
-  li.appendChild(deleteBtn);
+  li.appendChild(actionsContainer);
 
   todoList.appendChild(li);
   input.value = ""; 
