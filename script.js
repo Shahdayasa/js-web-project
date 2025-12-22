@@ -3,8 +3,16 @@ const button = document.getElementById("addBtn");
 const errorMsg = document.getElementById("errorMsg");
 const todoList = document.getElementById("todoList");
 
-button.addEventListener("click", function () {
-  const value = input.value.trim(); 
+// modal elements
+const deleteModal = document.getElementById("deleteModal");
+const confirmDelete = document.getElementById("confirmDelete");
+const cancelDelete = document.getElementById("cancelDelete");
+
+let taskToDelete = null;
+
+// add task
+button.addEventListener("click", () => {
+  const value = input.value.trim();
 
   if (value === "") {
     errorMsg.textContent = "task can not be empty";
@@ -15,7 +23,7 @@ button.addEventListener("click", function () {
     return;
   }
   if (value.length < 5) {
-    errorMsg.textContent = "Task can not be less then 5 char";
+    errorMsg.textContent = "Task can not be less than 5 characters";
     return;
   }
 
@@ -26,9 +34,10 @@ button.addEventListener("click", function () {
   const span = document.createElement("span");
   span.textContent = value;
 
-  const actionsContainer = document.createElement("div");
-  actionsContainer.classList.add("actions-container");
+  const actions = document.createElement("div");
+  actions.classList.add("actions-container");
 
+  // checkbox
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.classList.add("task-checkbox");
@@ -36,32 +45,50 @@ button.addEventListener("click", function () {
     span.style.textDecoration = checkbox.checked ? "line-through" : "none";
   });
 
+  // edit button
   const editBtn = document.createElement("button");
   editBtn.innerHTML = '<i class="fas fa-edit"></i>';
   editBtn.classList.add("icon-btn");
   editBtn.addEventListener("click", () => {
     const newValue = prompt("Edit your task:", span.textContent);
-    if (newValue) {
-      span.textContent = newValue;
+    if (newValue && newValue.trim().length >= 5) {
+      span.textContent = newValue.trim();
       checkbox.checked = false;
       span.style.textDecoration = "none";
     }
   });
 
+  // delete button
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
   deleteBtn.classList.add("icon-btn");
   deleteBtn.addEventListener("click", () => {
-    li.remove();
+    taskToDelete = li;
+    deleteModal.style.display = "flex";
   });
 
-  actionsContainer.appendChild(checkbox);
-  actionsContainer.appendChild(editBtn);
-  actionsContainer.appendChild(deleteBtn);
+  actions.appendChild(checkbox);
+  actions.appendChild(editBtn);
+  actions.appendChild(deleteBtn);
 
   li.appendChild(span);
-  li.appendChild(actionsContainer);
-
+  li.appendChild(actions);
   todoList.appendChild(li);
-  input.value = ""; 
+
+  input.value = "";
+});
+
+// confirm delete
+confirmDelete.addEventListener("click", () => {
+  if (taskToDelete) {
+    taskToDelete.remove();
+    taskToDelete = null;
+  }
+  deleteModal.style.display = "none";
+});
+
+// cancel delete
+cancelDelete.addEventListener("click", () => {
+  deleteModal.style.display = "none";
+  taskToDelete = null;
 });

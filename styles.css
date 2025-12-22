@@ -131,3 +131,19 @@ li span {
   align-items: center;
   justify-content: center;
 }
+.model-content{
+  background:white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+}
+.modal-action{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.confirm-btn{
+  background-color:#b92c2c ;
+}
