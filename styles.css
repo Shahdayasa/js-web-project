@@ -1,0 +1,48 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+h1{
+
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+
+}
+.input-box{
+    width: 70%;
+    border:1px solid;
+    padding: 30px;
+}
+
+input{
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.add-btn{
+    border: none;
+    width: 80%;
+    padding: 4px;
+   background-color: #51B5CE;
+   color: white;
+
+}
+.fa-book{
+    margin-right: 0px;
+  padding: 7px;
+    background-color:#51B5CE;
+    color: white;
+}
+button{
+        background-color:#51B5CE;
+        color: white;
+        border: none;
+        grid-column: 3;
+        padding: 10px;
+        width: 50%px;
+}
