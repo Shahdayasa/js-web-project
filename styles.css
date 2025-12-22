@@ -23,6 +23,7 @@ input[type="text"]{
     width: 80%;
     padding: 10px;
     margin-bottom: 10px;
+    width: 80%;
 }
 .add-btn{
     border: none;
@@ -30,7 +31,7 @@ input[type="text"]{
     padding: 4px;
    background-color: #51B5CE;
    color: white;
-
+width: 100%;
 }
 .fa-book{
     margin-right: 0px;
@@ -131,13 +132,15 @@ li span {
   align-items: center;
   justify-content: center;
 }
-.model-content{
-  background:white;
+.modal-content {
+  background-color: #ffffff;
   padding: 25px;
   border-radius: 12px;
   width: 350px;
   text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
+
 .modal-actions{
   margin-top: 20px;
   display: flex;

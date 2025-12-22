@@ -3,14 +3,12 @@ const button = document.getElementById("addBtn");
 const errorMsg = document.getElementById("errorMsg");
 const todoList = document.getElementById("todoList");
 
-// modal elements
 const deleteModal = document.getElementById("deleteModal");
 const confirmDelete = document.getElementById("confirmDelete");
 const cancelDelete = document.getElementById("cancelDelete");
 
 let taskToDelete = null;
 
-// add task
 button.addEventListener("click", () => {
   const value = input.value.trim();
 
@@ -37,7 +35,7 @@ button.addEventListener("click", () => {
   const actions = document.createElement("div");
   actions.classList.add("actions-container");
 
-  // checkbox
+  
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.classList.add("task-checkbox");
@@ -45,7 +43,7 @@ button.addEventListener("click", () => {
     span.style.textDecoration = checkbox.checked ? "line-through" : "none";
   });
 
-  // edit button
+  
   const editBtn = document.createElement("button");
   editBtn.innerHTML = '<i class="fas fa-edit"></i>';
   editBtn.classList.add("icon-btn");
@@ -58,37 +56,5 @@ button.addEventListener("click", () => {
     }
   });
 
-  // delete button
-  const deleteBtn = document.createElement("button");
-  deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-  deleteBtn.classList.add("icon-btn");
-  deleteBtn.addEventListener("click", () => {
-    taskToDelete = li;
-    deleteModal.style.display = "flex";
-  });
-
-  actions.appendChild(checkbox);
-  actions.appendChild(editBtn);
-  actions.appendChild(deleteBtn);
-
-  li.appendChild(span);
-  li.appendChild(actions);
-  todoList.appendChild(li);
-
-  input.value = "";
-});
-
-// confirm delete
-confirmDelete.addEventListener("click", () => {
-  if (taskToDelete) {
-    taskToDelete.remove();
-    taskToDelete = null;
-  }
-  deleteModal.style.display = "none";
-});
-
-// cancel delete
-cancelDelete.addEventListener("click", () => {
-  deleteModal.style.display = "none";
-  taskToDelete = null;
+  
 });
