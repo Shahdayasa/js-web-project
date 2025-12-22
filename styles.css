@@ -16,6 +16,7 @@ h1{
 .input-box{
     width: 70%;
     border:1px solid;
+    border-color: #ccc;
     padding: 30px;
 }
 
@@ -55,4 +56,20 @@ button{
 }
 button:hover{
     background-color:#034b5d ;
+}
+.error-msg{
+    color: red;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+ul {
+  margin-top: 20px;
+  padding: 0;
+}
+li {
+  list-style: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 8px;
 }
