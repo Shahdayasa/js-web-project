@@ -138,12 +138,17 @@ li span {
   width: 350px;
   text-align: center;
 }
-.modal-action{
+.modal-actions{
   margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 .confirm-btn{
-  background-color:#b92c2c ;
+  background-color:#b92c2c;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
 }
