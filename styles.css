@@ -161,3 +161,10 @@ li span {
   border-radius: 6px;
  cursor: pointer;
 }
+
+.confirm-btn:hover{
+  background-color: #8f1f1f;
+}
+.cancel-btn:hover{
+  background-color: #777;
+}
