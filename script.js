@@ -115,3 +115,13 @@ todoBtn.addEventListener("click",() =>{
     text.style.textDecoration = "none";
   });
 })
+
+
+const allBtn = document.getElementById("allBtn");
+
+allBtn.addEventListener("click",() =>{
+  const allTasks=document.querySelectorAll("#todoList li");
+   allTasks.forEach(task => {
+    text.style.display = "flex";
+  });
+});
