@@ -31,13 +31,12 @@
 <body>
 <h1>TodoInput</h1>
 <div class="input-box">
-<div class="test">
-    <i class="fa-solid fa-book"></i>
-<input type="text" placeholder="New Todo" id="todoInput" >
+  <i class="fa-solid fa-book"></i>
+  <input type="text" placeholder="New Todo" id="todoInput">
+</div>
+<button class="add-btn" id="addBtn">Add new task</button>
 <p class="error-msg" id="errorMsg"></p>
-</div>
-<button class="add-btn" id="addBtn">Add new task </button>
-</div>
+
 
 <h1>Todo List</h1>
 
@@ -53,8 +52,8 @@
 </ul>
 <p id="noTasks" style="display: none;">No tasks.</p>
 <div class="list-btn">
-<button id="deleteDoneBtn" style="background: #d35d5d;">Delete Done Tasks </button>
-<button id="deleteAlleBtn" style="background: #d35d5d;">Delete Done Tasks </button>
+<button id="deleteDoneBtn" >Delete Done Tasks </button>
+<button id="deleteAllBtn" >Delete All Tasks </button>
 </div>
 <div class="modal" id="confirmModal">
   <div class="modal-content">

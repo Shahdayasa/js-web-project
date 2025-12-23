@@ -16,15 +16,33 @@ const doneBtn = document.getElementById("doneBtn");
 const todoBtn = document.getElementById("todoBtn");
 const allBtn = document.getElementById("allBtn");
 
+const deleteDoneBtn = document.getElementById("deleteDoneBtn");
+const deleteAllBtn = document.getElementById("deleteAllBtn");
+const confirmModal = document.getElementById("confirmModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const modalConfirm = document.getElementById("modalConfirm");
+const modalCancel = document.getElementById("modalCancel");
+const noTasks = document.getElementById("noTasks");
+
 let taskToDelete = null;
 let taskToEdit = null;
 let savedStates = [];
+let currentAction = null;
+
+function checkEmpty() {
+  if (todoList.children.length === 0) {
+    noTasks.style.display = "block";
+  } else {
+    noTasks.style.display = "none";
+  }
+}
 
 button.addEventListener("click", () => {
   const value = input.value.trim();
 
   if (value === "") {
-    errorMsg.textContent = "task can not be empty";
+    errorMsg.textContent = "Task can not be empty";
     return;
   }
   if (!isNaN(value[0])) {
@@ -81,14 +99,17 @@ button.addEventListener("click", () => {
   todoList.appendChild(li);
 
   input.value = "";
+  checkEmpty();
 });
 
 confirmDelete.addEventListener("click", () => {
   if (taskToDelete) {
     taskToDelete.remove();
     taskToDelete = null;
+    savedStates = savedStates.filter(item => item.task !== taskToDelete);
   }
   deleteModal.style.display = "none";
+  checkEmpty();
 });
 
 cancelDelete.addEventListener("click", () => {
@@ -146,3 +167,44 @@ allBtn.addEventListener("click", () => {
     text.style.textDecoration = item.checked ? "line-through" : "none";
   });
 });
+
+deleteDoneBtn.addEventListener("click", () => {
+  modalTitle.textContent = "Delete Done Tasks";
+  modalText.textContent = "Are you sure you want to delete all completed tasks?";
+  currentAction = "done";
+  confirmModal.style.display = "flex";
+});
+
+deleteAllBtn.addEventListener("click", () => {
+  modalTitle.textContent = "Delete All Tasks";
+  modalText.textContent = "Are you sure you want to delete all tasks?";
+  currentAction = "all";
+  confirmModal.style.display = "flex";
+});
+
+modalConfirm.addEventListener("click", () => {
+  const tasks = document.querySelectorAll("#todoList li");
+
+  if (currentAction === "done") {
+    tasks.forEach(task => {
+      const checkbox = task.querySelector(".task-checkbox");
+      if (checkbox.checked) task.remove();
+    });
+  }
+
+  if (currentAction === "all") {
+    tasks.forEach(task => task.remove());
+  }
+
+  savedStates = [];
+  confirmModal.style.display = "none";
+  currentAction = null;
+  checkEmpty();
+});
+
+modalCancel.addEventListener("click", () => {
+  confirmModal.style.display = "none";
+  currentAction = null;
+});
+
+checkEmpty();

@@ -12,33 +12,52 @@ h1{
     gap: 1em;
 
 }
-.input-box{
-    width: 70%;
-    border:1px solid;
-    border-color: #ccc;
-    padding: 30px;
+.input-box {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
 }
 
-input[type="text"]{
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 80%;
+.input-box i {
+  flex-shrink: 0; 
+  background-color: #2888a0;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
 }
-.add-btn{
-    border: none;
-    width: 80%;
-    padding: 4px;
-   background-color: #51B5CE;
-   color: white;
-width: 100%;
+
+.input-box input {
+  flex-grow: 1; 
+  border: none;
+  padding: 10px;
+  font-size: 16px;
 }
-.fa-book{
-    margin-right: 0px;
-  padding: 7px;
-    background-color:#2888a0;
-    color: white;
+
+.input-box input:focus {
+  outline: none;
 }
+
+.add-btn {
+  width: 70%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #51B5CE;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #2888a0;
+}
+
 .list-btn{
     display: flex;
     justify-content: center;
@@ -183,5 +202,19 @@ li span {
 }
 #cancelEdit{
     background-color: #8f1f1f;
+
+}
+#deleteDoneBtn{
+  background-color:#d35d5d;
+}
+#deleteDoneBtn:hover{
+    background-color: #dc9191;
+
+}
+#deleteAllBtn{
+  background-color:#d35d5d;
+}
+#deleteAllBtn:hover{
+    background-color: #dc9191;
 
 }
