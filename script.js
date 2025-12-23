@@ -104,3 +104,14 @@ doneBtn.addEventListener("click", () =>{
     text.style.textDecoration = "line-through";
   });
 });
+const todoBtn = document.getElementById("todoBtn");
+todoBtn.addEventListener("click",() =>{
+  const allTasks=document.querySelectorAll("#todoList li");
+   allTasks.forEach(task => {
+    const checkbox = task.querySelector(".task-checkbox");
+    const text = task.querySelector("span");
+
+    checkbox.checked = false;
+    text.style.textDecoration = "none";
+  });
+})
