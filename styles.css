@@ -171,3 +171,10 @@ li span {
 .cancel-btn:hover{
   background-color: #777;
 }
+.edit-btn{
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}

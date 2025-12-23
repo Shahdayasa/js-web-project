@@ -11,9 +11,16 @@ const doneBtn = document.getElementById("doneBtn");
 const todoBtn = document.getElementById("todoBtn");
 const allBtn = document.getElementById("allBtn");
 
+const editModal = document.getElementById("editModal");
+const editInput = document.getElementById("editInput");
+const confirmEdit = document.getElementById("confirmEdit");
+const cancelEdit = document.getElementById("cancelEdit");
+
 let taskToDelete = null;
 let savedStates = [];
 
+let taskToEdit = null;
+let spanToEdit = null;
 button.addEventListener("click", () => {
   const value = input.value.trim();
 
@@ -48,15 +55,12 @@ button.addEventListener("click", () => {
   });
 
   const editBtn = document.createElement("button");
-  editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-  editBtn.classList.add("icon-btn");
-  editBtn.addEventListener("click", () => {
-    const newValue = prompt("Edit your task:", span.textContent);
-    if (newValue && newValue.trim().length >= 5) {
-      span.textContent = newValue.trim();
-    }
-  });
-
+editBtn.addEventListener("click",() => {
+  taskToEdit = li;
+  spanToEdit = span;
+  editInput.value = span.textContent;
+  editModal.style.display="flex";
+});
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
   deleteBtn.classList.add("icon-btn");
@@ -127,4 +131,16 @@ allBtn.addEventListener("click", () => {
     checkbox.checked = item.checked;
     text.style.textDecoration = item.checked ? "line-through" : "none";
   });
+});
+
+confirmEdit.addEventListener("click" , () => {
+const newValue = editInput.value.trim();
+if(newValue.length >=5) {
+  spanToEdit.textContent=newValue;
+  editModal.style.display = "none";
+}
+});
+
+cancelEdit.addEventListener("click", () =>{
+editModal.style.display="none";
 });
