@@ -7,7 +7,12 @@ const deleteModal = document.getElementById("deleteModal");
 const confirmDelete = document.getElementById("confirmDelete");
 const cancelDelete = document.getElementById("cancelDelete");
 
+const doneBtn = document.getElementById("doneBtn");
+const todoBtn = document.getElementById("todoBtn");
+const allBtn = document.getElementById("allBtn");
+
 let taskToDelete = null;
+let savedStates = [];
 
 button.addEventListener("click", () => {
   const value = input.value.trim();
@@ -28,22 +33,20 @@ button.addEventListener("click", () => {
   errorMsg.textContent = "";
 
   const li = document.createElement("li");
-
   const span = document.createElement("span");
   span.textContent = value;
 
   const actions = document.createElement("div");
   actions.classList.add("actions-container");
 
-  
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.classList.add("task-checkbox");
+
   checkbox.addEventListener("change", () => {
     span.style.textDecoration = checkbox.checked ? "line-through" : "none";
   });
 
-  
   const editBtn = document.createElement("button");
   editBtn.innerHTML = '<i class="fas fa-edit"></i>';
   editBtn.classList.add("icon-btn");
@@ -51,13 +54,10 @@ button.addEventListener("click", () => {
     const newValue = prompt("Edit your task:", span.textContent);
     if (newValue && newValue.trim().length >= 5) {
       span.textContent = newValue.trim();
-      checkbox.checked = false;
-      span.style.textDecoration = "none";
     }
   });
 
-  
-const deleteBtn = document.createElement("button");
+  const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
   deleteBtn.classList.add("icon-btn");
   deleteBtn.addEventListener("click", () => {
@@ -76,7 +76,6 @@ const deleteBtn = document.createElement("button");
   input.value = "";
 });
 
-
 confirmDelete.addEventListener("click", () => {
   if (taskToDelete) {
     taskToDelete.remove();
@@ -85,43 +84,47 @@ confirmDelete.addEventListener("click", () => {
   deleteModal.style.display = "none";
 });
 
-
 cancelDelete.addEventListener("click", () => {
   deleteModal.style.display = "none";
   taskToDelete = null;
 });
 
-const doneBtn = document.getElementById("doneBtn");
+function saveCurrentStates() {
+  savedStates = [];
+  document.querySelectorAll("#todoList li").forEach(task => {
+    const checkbox = task.querySelector(".task-checkbox");
+    savedStates.push({
+      task: task,
+      checked: checkbox.checked
+    });
+  });
+}
 
-doneBtn.addEventListener("click", () =>{
-  const allTasks = document.querySelectorAll("#todoList li");
-
-  allTasks.forEach(task => {
+doneBtn.addEventListener("click", () => {
+  saveCurrentStates();
+  document.querySelectorAll("#todoList li").forEach(task => {
     const checkbox = task.querySelector(".task-checkbox");
     const text = task.querySelector("span");
-
     checkbox.checked = true;
     text.style.textDecoration = "line-through";
   });
 });
-const todoBtn = document.getElementById("todoBtn");
-todoBtn.addEventListener("click",() =>{
-  const allTasks=document.querySelectorAll("#todoList li");
-   allTasks.forEach(task => {
+
+todoBtn.addEventListener("click", () => {
+  saveCurrentStates();
+  document.querySelectorAll("#todoList li").forEach(task => {
     const checkbox = task.querySelector(".task-checkbox");
     const text = task.querySelector("span");
-
     checkbox.checked = false;
     text.style.textDecoration = "none";
   });
-})
+});
 
-
-const allBtn = document.getElementById("allBtn");
-
-allBtn.addEventListener("click",() =>{
-  const allTasks=document.querySelectorAll("#todoList li");
-   allTasks.forEach(task => {
-    text.style.display = "flex";
+allBtn.addEventListener("click", () => {
+  savedStates.forEach(item => {
+    const checkbox = item.task.querySelector(".task-checkbox");
+    const text = item.task.querySelector("span");
+    checkbox.checked = item.checked;
+    text.style.textDecoration = item.checked ? "line-through" : "none";
   });
 });
