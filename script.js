@@ -7,20 +7,19 @@ const deleteModal = document.getElementById("deleteModal");
 const confirmDelete = document.getElementById("confirmDelete");
 const cancelDelete = document.getElementById("cancelDelete");
 
-const doneBtn = document.getElementById("doneBtn");
-const todoBtn = document.getElementById("todoBtn");
-const allBtn = document.getElementById("allBtn");
-
 const editModal = document.getElementById("editModal");
 const editInput = document.getElementById("editInput");
 const confirmEdit = document.getElementById("confirmEdit");
 const cancelEdit = document.getElementById("cancelEdit");
 
+const doneBtn = document.getElementById("doneBtn");
+const todoBtn = document.getElementById("todoBtn");
+const allBtn = document.getElementById("allBtn");
+
 let taskToDelete = null;
+let taskToEdit = null;
 let savedStates = [];
 
-let taskToEdit = null;
-let spanToEdit = null;
 button.addEventListener("click", () => {
   const value = input.value.trim();
 
@@ -55,15 +54,19 @@ button.addEventListener("click", () => {
   });
 
   const editBtn = document.createElement("button");
-editBtn.addEventListener("click",() => {
-  taskToEdit = li;
-  spanToEdit = span;
-  editInput.value = span.textContent;
-  editModal.style.display="flex";
-});
+  editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+  editBtn.classList.add("icon-btn");
+
+  editBtn.addEventListener("click", () => {
+    taskToEdit = span;
+    editInput.value = span.textContent;
+    editModal.style.display = "flex";
+  });
+
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
   deleteBtn.classList.add("icon-btn");
+
   deleteBtn.addEventListener("click", () => {
     taskToDelete = li;
     deleteModal.style.display = "flex";
@@ -93,14 +96,25 @@ cancelDelete.addEventListener("click", () => {
   taskToDelete = null;
 });
 
+confirmEdit.addEventListener("click", () => {
+  const newValue = editInput.value.trim();
+  if (newValue.length >= 5 && taskToEdit) {
+    taskToEdit.textContent = newValue;
+  }
+  editModal.style.display = "none";
+  taskToEdit = null;
+});
+
+cancelEdit.addEventListener("click", () => {
+  editModal.style.display = "none";
+  taskToEdit = null;
+});
+
 function saveCurrentStates() {
   savedStates = [];
   document.querySelectorAll("#todoList li").forEach(task => {
     const checkbox = task.querySelector(".task-checkbox");
-    savedStates.push({
-      task: task,
-      checked: checkbox.checked
-    });
+    savedStates.push({ task, checked: checkbox.checked });
   });
 }
 
@@ -131,16 +145,4 @@ allBtn.addEventListener("click", () => {
     checkbox.checked = item.checked;
     text.style.textDecoration = item.checked ? "line-through" : "none";
   });
-});
-
-confirmEdit.addEventListener("click" , () => {
-const newValue = editInput.value.trim();
-if(newValue.length >=5) {
-  spanToEdit.textContent=newValue;
-  editModal.style.display = "none";
-}
-});
-
-cancelEdit.addEventListener("click", () =>{
-editModal.style.display="none";
 });

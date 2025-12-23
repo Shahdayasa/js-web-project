@@ -49,9 +49,24 @@
 </div>
 <ul id="todoList">
 
-
     
 </ul>
+<p id="noTasks" style="display: none;">No tasks.</p>
+<div class="list-btn">
+<button id="deleteDoneBtn" style="background: #d35d5d;">Delete Done Tasks </button>
+<button id="deleteAlleBtn" style="background: #d35d5d;">Delete Done Tasks </button>
+</div>
+<div class="modal" id="confirmModal">
+  <div class="modal-content">
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+    <div class="modal-actions">
+      <button class="confirm-btn" id="modalConfirm">Confirm</button>
+      <button class="cancel-btn" id="modalCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
     <script src="script.js"></script>
 </body>
 </html>
